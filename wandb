@@ -1,0 +1,38 @@
+from pytorch_lightning.loggers import WandbLogger
+
+wandb_logger = WandbLogger(project="MNIST")
+trainer = Trainer(logger=wandb_logger)
+
+
+class LitModule(LightningModule):
+    def training_step(self, batch, batch_idx):
+        self.log("train/loss", loss)
+        
+wandb.log({"train/loss": loss})
+
+class LitModule(LightningModule):
+    def __init__(self, *args, **kwarg):
+        self.save_hyperparameters()
+        
+
+# add one parameter
+wandb_logger.experiment.config["key"] = value
+
+# add multiple parameters
+wandb_logger.experiment.config.update({key1: val1, key2: val2})
+
+# use directly wandb module
+wandb.config["key"] = value
+wandb.config.update()
+
+# log gradients and model topology
+wandb_logger.watch(model)
+
+# log gradients, parameter histogram and model topology
+wandb_logger.watch(model, log="all")
+
+# change log frequency of gradients and parameters (100 steps by default)
+wandb_logger.watch(model, log_freq=500)
+
+# do not log graph (in case of errors)
+wandb_logger.watch(model, log_graph=False)
